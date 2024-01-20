@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'CoffeCake';
+    src: url('CoffeCake.otf') format('opentype'),
+         url('CoffeCake.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.large {
+    font-size: 112px;
+}
+.centered {
+    text-align: center;
+    color: #3d5446
+}
+.medium {
+    font-size: medium;
+}
+.small {
+    font-size: 24px;
+}
+
+* {
+    font-family: 'CoffeCake';
+}
+
+body {
+    background: #80BCBD;
+}
+
+.my-button {
+    font-size: 40px; /* Larger font size */
+    padding: 20px 40px; /* Increased padding */
+    background-color: #85ab93
+}
+
