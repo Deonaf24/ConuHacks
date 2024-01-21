@@ -1,0 +1,68 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #e9ecef;
+    padding: 10px;
+    text-align: center;
+}
+
+#cityButton {
+    background-color: #85ab93;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 1.25rem;
+    color: white;
+    cursor: pointer;
+}
+
+#gameArea {
+    display: flex;
+    justify-content: space-between;
+    height: 80%;
+}
+
+#map {
+    flex-grow: 1;
+    background-color: #ddd;
+    margin: 10px;
+    /* Add your map styling here */
+}
+
+aside {
+    width: 200px;
+    background-color: #f8f9fa;
+    margin: 10px;
+    padding: 10px;
+}
+
+#scoreboard ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #e9ecef;
+}
+
+#timer {
+    font-size: 1.5rem;
+}
+
+#guessButton {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+}

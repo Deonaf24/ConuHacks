@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Interface</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+</head>
+<body>
+    <header>
+        <button id="cityButton">Oslo</button>
+    </header>
+    <!-- <div class="container" id="map">
+        <div id='map' style='width: 50%; height:200px;'></div>
+        <br/><br/> -->
+    <div id="gameArea">
+        <div id="map">Map placeholder</div>
+        <aside>
+            <div id="scoreboard">
+                <h2>Scoreboard</h2>
+                <ul>
+                    <li>Name - Score</li>
+                    <!-- More scores can be listed here -->
+                </ul>
+            </div>
+        </aside>
+    </div>
+    <footer>
+        <div id="timer">00:15</div>
+        <button id="guessButton">Guess</button>
+    </footer>
+    <!-- <script src="{{ url_for('static', filename='script.js') }}"></script> -->
+    <script>
+
+    // Example of setting dynamic text for the "Oslo" button
+    document.getElementById('cityButton').textContent = 'Oslo'; // This can be dynamic
+
+    // Functionality for the "Guess" button can be added here
+    document.getElementById('guessButton').addEventListener('click', function() {
+        alert('Guess button clicked!');
+    });
+
+    // Add your JavaScript code to handle the game logic, timer, and other interactions
+
+        var backendText = "Oslo"; // This would be dynamically set by your backend system
+        document.getElementById("cityButton").textContent = backendText;
+        mapboxgl.accessToken = "pk.eyJ1IjoiamVyZW1pYXMyMTMiLCJhIjoiY2xybWY1OTN6MTBpMjJrcDc0c3Z1Z3RzbiJ9.JAmfJcUFTUBaoVPQ7fvTyQ"
+          var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/jeremias213/clrmk500n003r01qq7p7g8h6z',
+            center: [34.7818, 32.0853],
+            zoom: 5.5,
+
+          });
+
+        var marker = null;
+        map.on("click", function (e) {
+            console.log(e.lngLat);
+
+            if (marker == null) {
+                marker = new mapboxgl.Marker()
+                    .setLngLat(e.lngLat)
+                    .addTo(map);
+            } else {
+                marker.setLngLat(e.lngLat)
+            }
+        });
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById("play").onclick = function () {
+                location.href = "website/gamescreen.html";
+            };
+        });
+    </script>
+</body>
+</html>
