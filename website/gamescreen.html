@@ -12,9 +12,42 @@
         <title>Citle</title>
     </head>
     <body>
-        <div>
-            <button type="button" class="btn btn-primary me-2 my-button mybuttonprimary"></button>
-        </div>
+        <head>
+            <style>
+
+                @font-face {
+                    font-family: 'CoffeCake';
+                    src: url('CoffeCake.otf') format('opentype'),
+                        url('website/static/CoffeCake.ttf') format('truetype');
+                    font-weight: normal;
+                    font-style: normal;
+                }
+
+                #cityButton {
+                    background-color: #85ab93;
+                    border: none;
+                    border-radius: 50px;
+                    padding: 10px 680px;
+                    text-align: center;
+                    font-family: CoffeCake;
+                    font-size: 32px;
+                    cursor: pointer;
+                    outline: none;
+                    margin-top: 20px;
+                    margin-left: 10px;
+                    margin-right: 4px;
+                    display: inline-block;
+                }
+            </style>
+        </head>
+        <body>
+            <button type="button" id="cityButton">Oslo</button>
+
+            <script>
+                var backendText = "Oslo"; // This would be dynamically set by your backend system
+                document.getElementById("cityButton").textContent = backendText;
+            </script>
+        </body>
     </body>
 
 </html>
