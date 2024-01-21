@@ -24,17 +24,17 @@
                 }
 
                 #cityButton {
-                    background-color: #85ab93;
+                    background-color: #D5F0C1;
                     border: none;
                     border-radius: 50px;
-                    padding: 10px 680px;
+                    padding: 10px 500px;
                     text-align: center;
                     font-family: CoffeCake;
                     font-size: 32px;
                     cursor: pointer;
                     outline: none;
                     margin-top: 20px;
-                    margin-left: 10px;
+                    margin-left: 50px;
                     margin-right: 4px;
                     display: inline-block;
                 }
@@ -42,12 +42,41 @@
         </head>
         <body>
             <button type="button" id="cityButton">Oslo</button>
-
-            <script>
-                var backendText = "Oslo"; // This would be dynamically set by your backend system
-                document.getElementById("cityButton").textContent = backendText;
-            </script>
+            <div class="container">
+                <div id='map' style='width: 95%; height:500px;'></div>
+                <br/><br/>
         </body>
     </body>
+    <script>
+        var backendText = "Oslo"; // This would be dynamically set by your backend system
+        document.getElementById("cityButton").textContent = backendText;
+        mapboxgl.accessToken = "{{ mapbox_access_token }}"
+          var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/jeremias213/clrmk500n003r01qq7p7g8h6z',
+            center: [34.7818, 32.0853],
+            zoom: 5.5,
+
+          });
+
+        var marker = null;
+        map.on("click", function (e) {
+            console.log(e.lngLat);
+
+            if (marker == null) {
+                marker = new mapboxgl.Marker()
+                    .setLngLat(e.lngLat)
+                    .addTo(map);
+            } else {
+                marker.setLngLat(e.lngLat)
+            }
+        });
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById("play").onclick = function () {
+                location.href = "website/gamescreen.html";
+            };
+        });
+
+    </script>
 
 </html>
