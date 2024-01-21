@@ -4,6 +4,7 @@
 	<title> My maps </title>
 	<script src='https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.js'></script>
 	<link href='https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css' rel='stylesheet' />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
 	<style>
 		.container {
 			max-width: 70%;
@@ -16,7 +17,7 @@
 
 <body>
 	<div class="container">
-	<div id='map' style='width: 95%; height:500px;'></div>
+	<div id="map" style='width: 95%; height:500px;'></div>
 	<br/><br/>
 </div>
 
@@ -26,24 +27,53 @@
 	mapboxgl.accessToken = "{{ mapbox_access_token }}"
 	  var map = new mapboxgl.Map({
 		container: 'map',
-		style: 'mapbox://styles/jeremias213/clrmgo6nb003q01p168f21q11',
+		style: 'mapbox://styles/jeremias213/clrmk500n003r01qq7p7g8h6z',
 		center: [34.7818, 32.0853],
 		zoom: 5.5,
 
-	  });
+	});
+
+	var socket = io("/playsocket");
+	var user_data = {
+		room: window.location.pathname.split('/')[1],
+		username: "ABCD"
+		// username: username
+	};
 
 	var marker = null;
 	map.on("click", function (e) {
-	    console.log(e.lngLat);
+		console.log(e.lngLat);
 
-	    if (marker == null) {
-	        marker = new mapboxgl.Marker()
-	            .setLngLat(e.lngLat)
-	            .addTo(map);
-	    } else {
-	        marker.setLngLat(e.lngLat)
-	    }
+		if (marker == null) {
+			marker = new mapboxgl.Marker()
+				.setLngLat(e.lngLat)
+				.addTo(map);
+
+			socket.emit("marker", {user: user_data,  loc: e.lngLat});
+		}
+		// else {
+		// 	marker.setLngLat(e.lngLat)
+		// }
+
+		// send location & lock user from making ugesses
 	});
+
+	document.addEventListener('DOMContentLoaded', function() {
+		socket.emit("join", user_data);
+	}, false);
+
+	window.onbeforeunload = closingCode;
+	function closingCode() {
+		socket.emit("leave", user_data);
+	}
+
+
+	socket.on("message", function(message_data) {
+		if (message_data) {
+			console.log(message_data);
+		}
+	});
+
 </script>
 
 </body>
